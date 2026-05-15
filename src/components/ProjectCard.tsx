@@ -31,7 +31,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
       initial={{ opacity: 0, y: 60 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, delay: (index % 3) * 0.1, ease: [0.65, 0, 0.35, 1] }}
+      transition={{ duration: 0.7, delay: (index % 3) * 0.1, ease: [0.65, 0, 0.35, 1] as [number, number, number, number] }}
       className="group relative bg-card border border-border rounded-lg p-8 overflow-hidden hover:border-gold/40 transition-colors duration-500"
     >
       {/* gold radial glow */}
