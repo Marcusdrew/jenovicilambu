@@ -88,7 +88,7 @@ function HomePage() {
           <div className="mt-16 grid md:grid-cols-12 gap-12 items-end">
             <Reveal delay={0.7} className="md:col-span-6">
               <p className="text-base md:text-lg text-muted-foreground max-w-md leading-relaxed">
-                Je suis <span className="text-foreground">{profile.name}</span>, {profile.role.toLowerCase()} basé à Kinshasa. {profile.manifesto}
+                Je suis <span className="text-foreground">Jenovic ILAMBU</span>, Développeur fullstack à Kinshasa, je transforme chaque idée en solution vivante.
               </p>
             </Reveal>
 

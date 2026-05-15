@@ -189,7 +189,7 @@ export const profile = {
   manifesto:
     "Toute solution informatique, je l'implémente et je lui donne vie.",
   bio: "Développeur fullstack basé à Kinshasa. Je conçois et construis des interfaces soignées — du site vitrine à la plateforme complète, du front au back, avec l'expérience utilisateur comme point cardinal.",
-  email: "ilambujenovic@gmail.com",
+  email: "ilambudj@gmail.com",
   github: "https://github.com/Marcusdrew",
   avatar: "https://avatars.githubusercontent.com/u/183597529?v=4",
 };
