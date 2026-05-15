@@ -94,7 +94,7 @@ function ProjectDetail() {
             <Reveal>
               <p className="eyebrow mb-3">Stack</p>
               <ul className="flex flex-wrap gap-2">
-                {project.stack.map((s) => (
+                {project.stack.map((s: string) => (
                   <li
                     key={s}
                     className="font-mono text-[10px] uppercase tracking-[0.15em] px-3 py-1.5 border border-border rounded-full text-muted-foreground"
@@ -109,7 +109,7 @@ function ProjectDetail() {
               <Reveal delay={0.1}>
                 <p className="eyebrow mb-3">Points forts</p>
                 <ul className="space-y-2">
-                  {project.highlights.map((h) => (
+                  {project.highlights.map((h: string) => (
                     <li
                       key={h}
                       className="flex items-start gap-3 font-serif text-lg text-foreground"
