@@ -1,8 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion, type Variants } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { profile, projects, skills } from "@/data/portfolio";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectRow } from "@/components/ProjectRow";
+import { Reveal, MaskReveal, SplitWords } from "@/components/Reveal";
+import { Marquee } from "@/components/Marquee";
+import { ProcessSection } from "@/components/ProcessSection";
+import { MagneticButton } from "@/components/MagneticButton";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -11,217 +16,239 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Portfolio de Jenovic Ilambu (Marcusdrew). Développeur fullstack en RDC. Sites vitrines, plateformes web et solutions sur-mesure.",
+          "Portfolio de Jenovic Ilambu (Marcusdrew). Développeur fullstack en RDC. Sites vitrines, plateformes web et solutions sur-mesure, avec une vraie attention au détail.",
       },
+      { property: "og:title", content: "Jenovic Ilambu — Développeur Fullstack à Kinshasa" },
+      {
+        property: "og:description",
+        content:
+          "Portfolio de Jenovic Ilambu — sites vitrines, plateformes web et solutions sur-mesure depuis Kinshasa.",
+      },
+      { property: "og:image", content: "https://avatars.githubusercontent.com/u/183597529?v=4" },
     ],
   }),
   component: HomePage,
 });
 
-const word: Variants = {
-  hidden: { opacity: 0, y: "100%" },
-  show: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, delay: 0.1 + i * 0.08, ease: [0.65, 0, 0.35, 1] as [number, number, number, number] },
-  }),
-};
-
 function HomePage() {
-  const featured = projects.slice(0, 3);
-  const heading = ["Donner", "vie", "à", "vos", "idées"];
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const markY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+
+  const featured = projects.slice(0, 4);
 
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 lg:px-12 pt-32 pb-20 overflow-hidden">
-        {/* huge background mark */}
+      <section
+        ref={heroRef}
+        className="relative min-h-screen flex flex-col justify-center px-6 lg:px-12 pt-32 pb-24 overflow-hidden"
+      >
+        {/* Giant J. mark */}
         <motion.div
           aria-hidden
+          style={{ y: markY, opacity: heroOpacity }}
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.04 }}
+          animate={{ opacity: 0.05 }}
           transition={{ duration: 2 }}
-          className="absolute -right-20 -bottom-32 font-serif text-[28rem] leading-none text-gold pointer-events-none select-none hidden md:block"
+          className="absolute -right-10 -bottom-32 font-serif italic text-[34rem] leading-none text-gold pointer-events-none select-none hidden md:block"
         >
           J.
         </motion.div>
 
-        <div className="mx-auto max-w-7xl w-full relative">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-8"
-          >
-            <span className="h-px w-12 bg-gold" />
-            Portfolio · {profile.location}
-          </motion.p>
+        <motion.div style={{ y: heroY, opacity: heroOpacity }} className="mx-auto max-w-7xl w-full relative">
+          <Reveal>
+            <p className="eyebrow flex items-center gap-3 mb-10">
+              <span className="h-px w-12 bg-gold" />
+              Portfolio · {profile.location} · Édition 2026
+            </p>
+          </Reveal>
 
-          <h1 className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-[10rem] leading-[0.95] tracking-tight">
-            <span className="block overflow-hidden">
-              <motion.span
-                custom={0}
-                variants={word}
-                initial="hidden"
-                animate="show"
-                className="inline-block italic text-muted-foreground"
-              >
-                Donner
-              </motion.span>
+          <h1 className="font-serif text-[15vw] md:text-[10vw] lg:text-[9.5vw] leading-[0.92] tracking-[-0.04em]">
+            <span className="block">
+              <SplitWords text="Donner vie" wordClassName="italic text-foreground/90" />
             </span>
-            <span className="block overflow-hidden">
-              <motion.span
-                custom={1}
-                variants={word}
-                initial="hidden"
-                animate="show"
-                className="inline-block text-gradient-gold"
-              >
-                vie
-              </motion.span>
-              <motion.span
-                custom={2}
-                variants={word}
-                initial="hidden"
-                animate="show"
-                className="inline-block ml-4 text-foreground"
-              >
-                à vos idées
-              </motion.span>
+            <span className="block">
+              <SplitWords
+                text="à vos idées"
+                wordClassName="text-gradient-gold"
+                delay={0.2}
+              />
             </span>
-            <span className="block overflow-hidden">
-              <motion.span
-                custom={3}
-                variants={word}
-                initial="hidden"
-                animate="show"
-                className="inline-block text-foreground"
-              >
-                — par le code.
-              </motion.span>
+            <span className="block">
+              <SplitWords text="— par le code." wordClassName="text-foreground" delay={0.45} />
             </span>
           </h1>
 
-          <div className="mt-16 grid md:grid-cols-2 gap-12 items-end">
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-lg text-muted-foreground max-w-md leading-relaxed"
-            >
-              Je suis <span className="text-foreground">{profile.name}</span>, {profile.role.toLowerCase()} basé à Kinshasa. {profile.manifesto}
-            </motion.p>
+          <div className="mt-16 grid md:grid-cols-12 gap-12 items-end">
+            <Reveal delay={0.7} className="md:col-span-6">
+              <p className="text-base md:text-lg text-muted-foreground max-w-md leading-relaxed">
+                Je suis <span className="text-foreground">{profile.name}</span>, {profile.role.toLowerCase()} basé à Kinshasa. {profile.manifesto}
+              </p>
+            </Reveal>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="flex flex-wrap gap-4 md:justify-end"
-            >
-              <Link
-                to="/projets"
-                className="group inline-flex items-center gap-3 bg-gold text-primary-foreground px-6 py-4 rounded-full text-sm uppercase tracking-[0.2em] hover:shadow-gold-lg transition-all"
-              >
-                Voir mes projets
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-3 border border-border hover:border-gold text-foreground px-6 py-4 rounded-full text-sm uppercase tracking-[0.2em] transition-all"
-              >
-                Me contacter
-              </Link>
-            </motion.div>
+            <Reveal delay={0.85} className="md:col-span-6 flex flex-wrap gap-4 md:justify-end">
+              <MagneticButton>
+                <Link
+                  to="/projets"
+                  data-cursor="hover"
+                  className="group inline-flex items-center gap-3 bg-gold text-primary-foreground px-7 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] hover:shadow-gold-lg transition-all"
+                >
+                  Voir les projets
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </MagneticButton>
+              <MagneticButton>
+                <Link
+                  to="/contact"
+                  data-cursor="hover"
+                  className="group inline-flex items-center gap-3 border border-border hover:border-gold text-foreground px-7 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] transition-all"
+                >
+                  Me contacter
+                </Link>
+              </MagneticButton>
+            </Reveal>
           </div>
-        </div>
+        </motion.div>
 
         {/* scroll cue */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
+          style={{ opacity: heroOpacity }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.3em] text-muted-foreground"
         >
           Scroll
           <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            animate={{ y: [0, 12, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="w-px h-10 bg-gradient-to-b from-gold to-transparent"
           />
         </motion.div>
       </section>
 
+      {/* MARQUEE */}
+      <section className="border-y border-border py-6 bg-card/30">
+        <Marquee
+          items={[
+            <span className="font-serif italic text-2xl md:text-3xl">React</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">TypeScript</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">Tailwind</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">Supabase</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">PHP</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">Figma</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">Next.js</span>,
+            <span className="font-serif italic text-2xl md:text-3xl">PostgreSQL</span>,
+          ]}
+        />
+      </section>
+
       {/* ABOUT */}
-      <section className="px-6 lg:px-12 py-32">
+      <section className="px-6 lg:px-12 py-32 md:py-48">
         <div className="mx-auto max-w-7xl grid md:grid-cols-12 gap-12">
-          <div className="md:col-span-4">
-            <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-6">
+          <Reveal className="md:col-span-5">
+            <p className="eyebrow flex items-center gap-3 mb-6">
               <span className="h-px w-12 bg-gold" />
               À propos
             </p>
-            <h2 className="font-serif text-5xl md:text-6xl text-foreground leading-tight">
-              L'artisan derrière le code.
+            <h2 className="font-serif text-5xl md:text-7xl text-foreground leading-[0.95] tracking-tight">
+              L'artisan <span className="italic text-gradient-gold">derrière</span> le code.
             </h2>
-          </div>
-          <div className="md:col-span-7 md:col-start-6 space-y-6 text-lg text-muted-foreground leading-relaxed">
-            <p>{profile.bio}</p>
-            <p>
-              Mon approche : écouter, comprendre le besoin, puis livrer une solution propre, performante et plaisante à utiliser. Chaque pixel et chaque ligne de code comptent.
-            </p>
-            <div className="pt-6 grid grid-cols-3 gap-6 border-t border-border">
-              <div>
-                <div className="font-serif text-4xl text-gradient-gold">7+</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2">Projets livrés</div>
+          </Reveal>
+
+          <div className="md:col-span-6 md:col-start-7 space-y-6">
+            <Reveal delay={0.1}>
+              <div className="flex items-center gap-5 mb-8">
+                <MaskReveal className="w-20 h-20 rounded-full overflow-hidden border border-gold/40">
+                  <img
+                    src={profile.avatar}
+                    alt={profile.name}
+                    className="w-full h-full object-cover"
+                  />
+                </MaskReveal>
+                <div>
+                  <p className="font-serif text-2xl text-foreground italic">{profile.name}</p>
+                  <p className="font-mono text-xs text-muted-foreground tracking-widest uppercase">
+                    {profile.role} — {profile.location}
+                  </p>
+                </div>
               </div>
-              <div>
-                <div className="font-serif text-4xl text-gradient-gold">3</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2">Démos en ligne</div>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                {profile.bio}
+              </p>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
+                Mon approche : écouter, comprendre le besoin, puis livrer une solution propre, performante et plaisante à utiliser. Chaque pixel et chaque ligne de code comptent.
+              </p>
+            </Reveal>
+            <Reveal delay={0.35}>
+              <div className="pt-8 grid grid-cols-3 gap-4 border-t border-border">
+                <Stat n="08" label="Projets livrés" />
+                <Stat n="05" label="Démos en ligne" />
+                <Stat n="100%" label="Engagement" />
               </div>
-              <div>
-                <div className="font-serif text-4xl text-gradient-gold">100%</div>
-                <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground mt-2">Engagement</div>
-              </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* FEATURED PROJECTS */}
+      {/* FEATURED PROJECTS — editorial list */}
       <section className="px-6 lg:px-12 py-20">
         <div className="mx-auto max-w-7xl">
           <div className="flex items-end justify-between mb-16">
-            <div>
-              <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-6">
+            <Reveal>
+              <p className="eyebrow flex items-center gap-3 mb-6">
                 <span className="h-px w-12 bg-gold" />
-                Sélection
+                Sélection · {featured.length} projets
               </p>
-              <h2 className="font-serif text-5xl md:text-6xl">Travaux récents</h2>
-            </div>
-            <Link
-              to="/projets"
-              className="hidden md:inline-flex items-center gap-2 text-sm text-foreground gold-line"
-            >
-              Tout voir
-              <ArrowUpRight className="w-4 h-4" />
-            </Link>
+              <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
+                Travaux <span className="italic text-gradient-gold">récents</span>.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.2}>
+              <Link
+                to="/projets"
+                data-cursor="hover"
+                className="hidden md:inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-foreground gold-line"
+              >
+                Tout voir
+                <ArrowUpRight className="w-4 h-4" />
+              </Link>
+            </Reveal>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="border-t border-border">
             {featured.map((p, i) => (
-              <ProjectCard key={p.slug} project={p} index={i} />
+              <ProjectRow key={p.slug} project={p} index={i} />
             ))}
           </div>
         </div>
       </section>
 
+      {/* PROCESS */}
+      <ProcessSection />
+
       {/* SKILLS */}
       <section className="px-6 lg:px-12 py-32">
         <div className="mx-auto max-w-7xl">
-          <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-6">
-            <span className="h-px w-12 bg-gold" />
-            Boîte à outils
-          </p>
-          <h2 className="font-serif text-5xl md:text-6xl mb-16">Ma stack.</h2>
+          <Reveal>
+            <p className="eyebrow flex items-center gap-3 mb-6">
+              <span className="h-px w-12 bg-gold" />
+              Boîte à outils
+            </p>
+            <h2 className="font-serif text-5xl md:text-7xl mb-16 leading-[0.95]">
+              Ma <span className="italic text-gradient-gold">stack</span>.
+            </h2>
+          </Reveal>
 
           <div className="grid md:grid-cols-3 gap-px bg-border rounded-lg overflow-hidden border border-border">
             {skills.map((group, gi) => (
@@ -230,12 +257,14 @@ function HomePage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: gi * 0.1 }}
-                className="bg-card p-10 hover:bg-secondary/40 transition-colors"
+                transition={{ duration: 0.7, delay: gi * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-card p-10 hover:bg-secondary/40 transition-colors group"
               >
                 <div className="flex items-baseline gap-3 mb-8">
-                  <span className="text-gold font-serif text-2xl">0{gi + 1}</span>
-                  <h3 className="text-xl text-foreground uppercase tracking-[0.15em]">{group.group}</h3>
+                  <span className="text-gold font-serif italic text-3xl">0{gi + 1}</span>
+                  <h3 className="text-base text-foreground font-mono uppercase tracking-[0.2em]">
+                    {group.group}
+                  </h3>
                 </div>
                 <ul className="space-y-3">
                   {group.items.map((item) => (
@@ -243,8 +272,8 @@ function HomePage() {
                       key={item}
                       className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
                     >
-                      <span className="w-1 h-1 rounded-full bg-gold" />
-                      {item}
+                      <span className="w-1 h-1 rounded-full bg-gold transition-all group-hover:w-2" />
+                      <span className="font-serif text-xl">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -259,28 +288,42 @@ function HomePage() {
         <div className="mx-auto max-w-7xl relative bg-card border border-border rounded-2xl overflow-hidden p-12 md:p-20">
           <div
             aria-hidden
-            className="absolute inset-0 opacity-50"
+            className="absolute inset-0 opacity-60"
             style={{ background: "var(--gradient-radial-gold)" }}
           />
           <div className="relative grid md:grid-cols-2 gap-10 items-center">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-gold mb-4">Prochain projet</p>
-              <h2 className="font-serif text-5xl md:text-6xl leading-tight">
+            <Reveal>
+              <p className="eyebrow mb-4">Prochain projet</p>
+              <h2 className="font-serif text-5xl md:text-7xl leading-[0.95]">
                 Donnons vie à votre <span className="italic text-gradient-gold">vision</span>.
               </h2>
-            </div>
-            <div className="md:text-right">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-3 bg-gold text-primary-foreground px-8 py-5 rounded-full text-sm uppercase tracking-[0.2em] hover:shadow-gold-lg transition-all"
-              >
-                Démarrer une conversation
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+            </Reveal>
+            <Reveal delay={0.2} className="md:text-right">
+              <MagneticButton as="span">
+                <Link
+                  to="/contact"
+                  data-cursor="hover"
+                  className="group inline-flex items-center gap-3 bg-gold text-primary-foreground px-8 py-5 rounded-full text-xs font-mono uppercase tracking-[0.2em] hover:shadow-gold-lg transition-all"
+                >
+                  Démarrer une conversation
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </MagneticButton>
+            </Reveal>
           </div>
         </div>
       </section>
     </>
+  );
+}
+
+function Stat({ n, label }: { n: string; label: string }) {
+  return (
+    <div>
+      <div className="font-serif italic text-5xl text-gradient-gold">{n}</div>
+      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-2">
+        {label}
+      </div>
+    </div>
   );
 }
