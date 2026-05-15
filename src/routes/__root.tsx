@@ -113,7 +113,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <CustomCursor />
+      <Navbar />
+      <main className="relative z-10">
+        <Outlet />
+      </main>
+      <Footer />
     </QueryClientProvider>
   );
 }
