@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { projects } from "@/data/portfolio";
-import { ProjectCard } from "@/components/ProjectCard";
+import { ProjectRow } from "@/components/ProjectRow";
+import { Reveal, SplitWords } from "@/components/Reveal";
+import { ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/projets")({
   head: () => ({
@@ -10,7 +11,7 @@ export const Route = createFileRoute("/projets")({
       {
         name: "description",
         content:
-          "Sélection de projets web réalisés par Jenovic Ilambu : sites vitrines, plateformes, ONG et plus.",
+          "Sélection de projets web réalisés par Jenovic Ilambu : sites vitrines, plateformes éducatives, ONG et solutions sur-mesure depuis Kinshasa.",
       },
       { property: "og:title", content: "Projets — Jenovic Ilambu" },
       {
@@ -24,32 +25,57 @@ export const Route = createFileRoute("/projets")({
 
 function ProjectsPage() {
   return (
-    <section className="px-6 lg:px-12 pt-40 pb-20">
-      <div className="mx-auto max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="mb-20"
-        >
-          <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-6">
-            <span className="h-px w-12 bg-gold" />
-            Projets · {projects.length} réalisations
-          </p>
-          <h1 className="font-serif text-6xl md:text-8xl leading-[0.95] tracking-tight max-w-4xl">
-            Une <span className="italic text-gradient-gold">sélection</span> de mes derniers travaux.
+    <>
+      <section className="px-6 lg:px-12 pt-40 pb-16">
+        <div className="mx-auto max-w-7xl">
+          <Reveal>
+            <p className="eyebrow flex items-center gap-3 mb-6">
+              <span className="h-px w-12 bg-gold" />
+              Index · {projects.length} réalisations
+            </p>
+          </Reveal>
+          <h1 className="font-serif text-[14vw] md:text-[9vw] leading-[0.92] tracking-[-0.04em] max-w-5xl">
+            <span className="block">
+              <SplitWords text="Une sélection" wordClassName="italic text-foreground/90" />
+            </span>
+            <span className="block">
+              <SplitWords text="de mes travaux." wordClassName="text-gradient-gold" delay={0.2} />
+            </span>
           </h1>
-          <p className="mt-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            Chaque projet est une histoire. Voici quelques-unes de celles que j'ai eu la chance d'écrire — pour des entreprises, des ONG et des initiatives locales.
-          </p>
-        </motion.div>
+          <Reveal delay={0.6}>
+            <p className="mt-10 max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed">
+              Chaque projet est une histoire — pour des entreprises, des ONG, des initiatives locales. Survolez un titre pour en avoir un aperçu, cliquez pour entrer dans le détail.
+            </p>
+          </Reveal>
+        </div>
+      </section>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="px-6 lg:px-12 pb-32">
+        <div className="mx-auto max-w-7xl border-t border-border">
           {projects.map((p, i) => (
-            <ProjectCard key={p.slug} project={p} index={i} />
+            <ProjectRow key={p.slug} project={p} index={i} />
           ))}
         </div>
-      </div>
-    </section>
+      </section>
+
+      <section className="px-6 lg:px-12 pb-32">
+        <div className="mx-auto max-w-7xl border-t border-border pt-16 flex flex-col md:flex-row md:items-end md:justify-between gap-8">
+          <div>
+            <p className="eyebrow mb-4">Et après ?</p>
+            <h2 className="font-serif text-4xl md:text-6xl leading-[0.95]">
+              Votre projet pourrait être <span className="italic text-gradient-gold">le prochain</span>.
+            </h2>
+          </div>
+          <Link
+            to="/contact"
+            data-cursor="hover"
+            className="group inline-flex items-center gap-3 bg-gold text-primary-foreground px-7 py-4 rounded-full text-xs font-mono uppercase tracking-[0.2em] hover:shadow-gold-lg transition-all self-start"
+          >
+            Démarrer
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
