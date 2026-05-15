@@ -18,12 +18,12 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-const word = {
+const word: Variants = {
   hidden: { opacity: 0, y: "100%" },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, delay: 0.1 + i * 0.08, ease: [0.65, 0, 0.35, 1] },
+    transition: { duration: 0.8, delay: 0.1 + i * 0.08, ease: [0.65, 0, 0.35, 1] as [number, number, number, number] },
   }),
 };
 
