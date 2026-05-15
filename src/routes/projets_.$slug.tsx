@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowUpRight, Github } from "lucide-react";
 import { projects } from "@/data/portfolio";
 import { Reveal, MaskReveal, SplitWords } from "@/components/Reveal";
 
-export const Route = createFileRoute("/projets/$slug")({
+export const Route = createFileRoute("/projets_/$slug")({
   loader: ({ params }) => {
     const project = projects.find((p) => p.slug === params.slug);
     if (!project) throw notFound();
