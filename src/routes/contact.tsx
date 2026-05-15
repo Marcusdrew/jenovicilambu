@@ -46,14 +46,14 @@ function ContactPage() {
           transition={{ duration: 0.7 }}
           className="md:col-span-5"
         >
-          <p className="flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-gold mb-6">
+          <p className="eyebrow flex items-center gap-3 mb-6">
             <span className="h-px w-12 bg-gold" />
-            Contact
+            Contact · Réponse sous 24h
           </p>
-          <h1 className="font-serif text-6xl md:text-7xl leading-[0.95] tracking-tight">
+          <h1 className="font-serif text-[14vw] md:text-[7vw] leading-[0.92] tracking-[-0.04em]">
             Parlons de votre <span className="italic text-gradient-gold">projet</span>.
           </h1>
-          <p className="mt-8 text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-8 text-base md:text-lg text-muted-foreground leading-relaxed">
             Une idée, un site à refondre, une plateforme à construire ? Écrivez-moi, je réponds rapidement.
           </p>
 
