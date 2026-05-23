@@ -192,8 +192,8 @@ function HomePage() {
             </Reveal>
             <Reveal delay={0.35}>
               <div className="pt-8 grid grid-cols-3 gap-4 border-t border-border">
-                <Stat n="08" label="Projets livrés" />
-                <Stat n="05" label="Démos en ligne" />
+                <Stat n="10" label="Projets livrés" />
+                <Stat n="08" label="Démos en ligne" />
                 <Stat n="100%" label="Engagement" />
               </div>
             </Reveal>
