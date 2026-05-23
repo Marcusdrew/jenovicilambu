@@ -18,6 +18,36 @@ const ghCover = (owner: string, repo: string) =>
 
 export const projects: Project[] = [
   {
+    slug: "jk-service",
+    title: "JK Service",
+    description:
+      "Aluminium et inox sur mesure : fenêtres, portes, vérandas, escaliers et garde-corps. L'atelier de Jean Kakudji, à Kinsuka Pêcheur.",
+    longDescription:
+      "JK Service est un atelier d'aluminium et d'inox basé à Kinshasa. Le site met en avant le savoir-faire artisanal, le catalogue de réalisations, et facilite la prise de contact pour devis sur mesure.",
+    stack: ["TypeScript", "React", "Tailwind"],
+    github: "https://github.com/Marcusdrew/JK-Service-",
+    demo: "https://jeankservice.lovable.app/",
+    category: "Artisanat",
+    year: "2026",
+    cover: ghCover("Marcusdrew", "JK-Service-"),
+    highlights: ["Sur-mesure", "Catalogue visuel", "Devis facilité"],
+  },
+  {
+    slug: "drew-jerseys",
+    title: "Drew Jerseys",
+    description:
+      "Prototype e-commerce dédié à la vente de maillots de football — catalogue, panier, parcours d'achat fluide.",
+    longDescription:
+      "Une boutique en ligne pour les passionnés de foot : navigation par équipe, fiche produit soignée, panier et tunnel d'achat clair. Un prototype prêt à être branché sur une vraie infra e-commerce.",
+    stack: ["TypeScript", "React", "Tailwind"],
+    github: "https://github.com/Marcusdrew/Drew-Jerseys-Prototype-",
+    demo: "https://drewjerseys-prototype.lovable.app",
+    category: "E-commerce",
+    year: "2026",
+    cover: ghCover("Marcusdrew", "Drew-Jerseys-Prototype-"),
+    highlights: ["Catalogue produit", "Panier complet", "UX shopping"],
+  },
+  {
     slug: "digitalmarketingrdc",
     title: "Digital Marketing RDC",
     description:
@@ -33,18 +63,18 @@ export const projects: Project[] = [
     highlights: ["Identité claire", "Conversion-first", "Responsive complet"],
   },
   {
-    slug: "ulc-campus",
-    title: "SmartCampus ULC",
+    slug: "smartcampus",
+    title: "SmartCampus",
     description:
       "Plateforme de suivi pédagogique et psychologique — outiller chaque enfant pour qu'il révèle son meilleur.",
     longDescription:
       "SmartCampus rassemble enseignants, parents et psychologues autour de l'enfant. Tableaux de bord pédagogiques, suivi du bien-être, communication transparente.",
     stack: ["React", "TypeScript", "Tailwind", "Supabase"],
-    github: "https://github.com/Marcusdrew/ULC-Campus",
+    github: "https://github.com/Marcusdrew/SmartCampus",
     demo: "https://smartcampusulc.netlify.app/",
     category: "Éducation",
     year: "2026",
-    cover: ghCover("Marcusdrew", "ULC-Campus"),
+    cover: ghCover("Marcusdrew", "SmartCampus"),
     highlights: ["Multi-rôles", "Suivi temps réel", "Interface enfant-friendly"],
   },
   {
@@ -56,11 +86,13 @@ export const projects: Project[] = [
       "Un espace pour fédérer les joueurs d'échecs en RDC : profils, organisation de tournois, et exploration du jeu. Conçu pour grandir avec la communauté.",
     stack: ["TypeScript", "React", "Tailwind"],
     github: "https://github.com/Marcusdrew/chessmasterdrc",
+    demo: "https://chessmasterdrc.lovable.app",
     category: "Communauté",
     year: "2026",
     cover: ghCover("Marcusdrew", "chessmasterdrc"),
     highlights: ["Profils joueurs", "Tournois", "Communauté locale"],
   },
+
   {
     slug: "lumire-makeup",
     title: "Lumire Makeup",
