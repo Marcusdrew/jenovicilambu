@@ -71,7 +71,7 @@ export const projects: Project[] = [
       "SmartCampus rassemble enseignants, parents et psychologues autour de l'enfant. Tableaux de bord pédagogiques, suivi du bien-être, communication transparente.",
     stack: ["React", "TypeScript", "Tailwind", "Supabase"],
     github: "https://github.com/Marcusdrew/SmartCampus",
-    demo: "https://smartcampusulc.netlify.app/",
+    demo: "https://smart-campus-9fpf.vercel.app/",
     category: "Éducation",
     year: "2026",
     cover: ghCover("Marcusdrew", "SmartCampus"),
