@@ -16,6 +16,10 @@ export type Project = {
 const ghCover = (owner: string, repo: string) =>
   `https://opengraph.githubassets.com/1/${owner}/${repo}`;
 
+// Live screenshot of the deployed site — plus parlant qu'un aperçu GitHub
+export const siteShot = (url: string, w = 1280) =>
+  `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=${w}`;
+
 export const projects: Project[] = [
   {
     slug: "jk-service",
@@ -29,7 +33,7 @@ export const projects: Project[] = [
     demo: "https://jeankservice.lovable.app/",
     category: "Artisanat",
     year: "2026",
-    cover: ghCover("Marcusdrew", "JK-Service-"),
+    cover: siteShot("https://jeankservice.lovable.app/"),
     highlights: ["Sur-mesure", "Catalogue visuel", "Devis facilité"],
   },
   {
@@ -44,7 +48,7 @@ export const projects: Project[] = [
     demo: "https://drewjerseys-prototype.lovable.app",
     category: "E-commerce",
     year: "2026",
-    cover: ghCover("Marcusdrew", "Drew-Jerseys-Prototype-"),
+    cover: siteShot("https://drewjerseys-prototype.lovable.app"),
     highlights: ["Catalogue produit", "Panier complet", "UX shopping"],
   },
   {
@@ -59,7 +63,7 @@ export const projects: Project[] = [
     demo: "https://digitalmarketingrdc.lovable.app/",
     category: "Agence",
     year: "2026",
-    cover: ghCover("Marcusdrew", "digitalmarketingrdc"),
+    cover: siteShot("https://digitalmarketingrdc.lovable.app/"),
     highlights: ["Identité claire", "Conversion-first", "Responsive complet"],
   },
   {
@@ -74,7 +78,7 @@ export const projects: Project[] = [
     demo: "https://kinshasa-livraison.vercel.app",
     category: "Logistique",
     year: "2026",
-    cover: ghCover("Marcusdrew", "Kinshasa-Livraison"),
+    cover: siteShot("https://kinshasa-livraison.vercel.app"),
     highlights: ["Suivi temps réel", "Carte géolocalisée", "Gestion des livreurs"],
   },
   {
@@ -89,7 +93,7 @@ export const projects: Project[] = [
     demo: "https://cinemagic-flow-16.lovable.app",
     category: "Streaming",
     year: "2026",
-    cover: ghCover("Marcusdrew", "DrewMovie"),
+    cover: siteShot("https://cinemagic-flow-16.lovable.app"),
     highlights: ["Streaming vidéo", "UX premium", "Architecture scalable"],
   },
   {
@@ -104,7 +108,7 @@ export const projects: Project[] = [
     demo: "https://bcc-pro.lovable.app",
     category: "Finance",
     year: "2026",
-    cover: ghCover("Marcusdrew", "bcc-redesign-pro"),
+    cover: siteShot("https://bcc-pro.lovable.app"),
     highlights: ["Refonte UX/UI", "Identité respectée", "Design institutionnel"],
   },
   {
@@ -119,7 +123,7 @@ export const projects: Project[] = [
     demo: "https://chessmasterdrc.lovable.app",
     category: "Communauté",
     year: "2026",
-    cover: ghCover("Marcusdrew", "chessmasterdrc"),
+    cover: siteShot("https://chessmasterdrc.lovable.app"),
     highlights: ["Profils joueurs", "Tournois", "Communauté locale"],
   },
 
@@ -135,7 +139,7 @@ export const projects: Project[] = [
     demo: "https://finch-gold-78047701.figma.site/",
     category: "Beauté",
     year: "2026",
-    cover: ghCover("Marcusdrew", "LumireMakeup"),
+    cover: siteShot("https://finch-gold-78047701.figma.site/"),
     highlights: ["Direction artistique", "Univers de marque", "Mise en scène"],
   },
   {
@@ -150,7 +154,7 @@ export const projects: Project[] = [
     demo: "https://kaisencares.netlify.app/",
     category: "ONG",
     year: "2025",
-    cover: ghCover("Marcusdrew", "Kaisen-Cares"),
+    cover: siteShot("https://kaisencares.netlify.app/"),
     highlights: ["Storytelling fort", "Don facilité", "Transparence"],
   },
   {
@@ -165,7 +169,7 @@ export const projects: Project[] = [
     demo: "https://jikojibu.netlify.app/",
     category: "Écologie",
     year: "2025",
-    cover: ghCover("Marcusdrew", "JIKO-JIBU"),
+    cover: siteShot("https://jikojibu.netlify.app/"),
     highlights: ["Vision environnementale", "Présence locale", "Site vitrine"],
   },
   {
