@@ -75,7 +75,7 @@ export function ProjectRow({ project, index }: { project: Project; index: number
           <img
             src={project.cover}
             alt=""
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-top"
             loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
