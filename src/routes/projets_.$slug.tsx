@@ -62,7 +62,7 @@ function ProjectDetail() {
           </Reveal>
 
           <h1 className="font-serif text-[12vw] md:text-[8vw] leading-[0.92] tracking-[-0.04em]">
-            <SplitWords text={project.title} wordClassName="text-foreground" />
+            <SplitWords text={project.title} wordClassName="text-foreground" immediate />
           </h1>
 
           <Reveal delay={0.5}>
@@ -74,9 +74,9 @@ function ProjectDetail() {
       </section>
 
       {/* Cover — capture du site, cliquable */}
-      <section className="px-6 lg:px-12 pb-20">
+      <section className="px-6 lg:px-12 pb-16">
         <div className="mx-auto max-w-7xl">
-          <MaskReveal className="rounded-2xl overflow-hidden border border-border relative">
+          <MaskReveal immediate delay={0.3} className="rounded-2xl overflow-hidden border border-border relative">
             {project.demo ? (
               <a
                 href={project.demo}
