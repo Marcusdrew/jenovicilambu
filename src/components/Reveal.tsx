@@ -31,10 +31,13 @@ export function MaskReveal({
   children,
   delay = 0,
   className,
+  immediate = false,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
+  /** Animate on mount instead of waiting for scroll — for above-the-fold content */
+  immediate?: boolean;
 }) {
   const v: Variants = {
     hidden: { clipPath: "inset(0 100% 0 0)" },
@@ -47,8 +50,9 @@ export function MaskReveal({
     <motion.div
       variants={v}
       initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, margin: "-60px" }}
+      {...(immediate
+        ? { animate: "show" }
+        : { whileInView: "show", viewport: { once: true, margin: "-60px" } })}
       className={className}
     >
       {children}
@@ -62,12 +66,15 @@ export function SplitWords({
   wordClassName,
   delay = 0,
   stagger = 0.06,
+  immediate = false,
 }: {
   text: string;
   className?: string;
   wordClassName?: string;
   delay?: number;
   stagger?: number;
+  /** Animate on mount instead of waiting for scroll — for above-the-fold content */
+  immediate?: boolean;
 }) {
   const words = text.split(" ");
   return (
@@ -76,8 +83,9 @@ export function SplitWords({
         <span key={i} className="inline-block overflow-hidden align-bottom">
           <motion.span
             initial={{ y: "110%" }}
-            whileInView={{ y: 0 }}
-            viewport={{ once: true }}
+            {...(immediate
+              ? { animate: { y: 0 } }
+              : { whileInView: { y: 0 }, viewport: { once: true } })}
             transition={{ duration: 0.8, delay: delay + i * stagger, ease }}
             className={`inline-block ${wordClassName ?? ""}`}
           >
