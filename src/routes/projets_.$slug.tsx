@@ -124,7 +124,7 @@ function ProjectDetail() {
 
 
       {/* Body */}
-      <section className="px-6 lg:px-12 pb-32">
+      <section className="px-6 lg:px-12 pb-24">
         <div className="mx-auto max-w-7xl grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4 space-y-10">
             <Reveal>
@@ -201,7 +201,7 @@ function ProjectDetail() {
       </section>
 
       {/* Next project */}
-      <section className="px-6 lg:px-12 pb-32 border-t border-border pt-20">
+      <section className="px-6 lg:px-12 pb-24 border-t border-border pt-16">
         <div className="mx-auto max-w-7xl">
           <Link
             to="/projets/$slug"
