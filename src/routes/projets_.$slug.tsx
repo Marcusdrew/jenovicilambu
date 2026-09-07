@@ -41,7 +41,7 @@ function ProjectDetail() {
 
   return (
     <>
-      <section className="px-6 lg:px-12 pt-40 pb-16">
+      <section className="px-6 lg:px-12 pt-32 md:pt-36 pb-10">
         <div className="mx-auto max-w-7xl">
           <Reveal>
             <Link
