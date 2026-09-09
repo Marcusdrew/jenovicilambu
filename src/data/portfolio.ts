@@ -112,6 +112,50 @@ export const projects: Project[] = [
     highlights: ["Refonte UX/UI", "Identité respectée", "Design institutionnel"],
   },
   {
+    slug: "template-ecommerce",
+    title: "Template E-commerce",
+    description:
+      "Modèle de boutique en ligne réutilisable — catalogue, fiche produit et panier prêts à être adaptés à n'importe quelle marque.",
+    longDescription:
+      "Un template e-commerce pensé comme une base solide : structure de catalogue, fiches produits, panier et parcours d'achat déjà en place. Il suffit de brancher les produits et l'identité de la marque pour lancer une boutique.",
+    stack: ["TypeScript", "React", "Tailwind"],
+    github: "https://github.com/Marcusdrew/Template-ecommerce",
+    demo: "https://template-ecommerce-xi.vercel.app",
+    category: "E-commerce",
+    year: "2026",
+    cover: siteShot("https://template-ecommerce-xi.vercel.app"),
+    highlights: ["Base réutilisable", "Parcours d'achat", "Design adaptable"],
+  },
+  {
+    slug: "architect",
+    title: "Architect",
+    description:
+      "Vitrine pour un studio d'architecture — mise en avant des projets, des volumes et du travail de l'espace.",
+    longDescription:
+      "Un site pensé pour l'architecture : grandes images, respiration généreuse et navigation sobre pour laisser les projets parler d'eux-mêmes.",
+    stack: ["TypeScript", "React", "Tailwind"],
+    github: "https://github.com/Marcusdrew/architect",
+    demo: "https://architect-psi-rose.vercel.app",
+    category: "Architecture",
+    year: "2026",
+    cover: siteShot("https://architect-psi-rose.vercel.app"),
+    highlights: ["Mise en avant visuelle", "Design épuré", "Portfolio projet"],
+  },
+  {
+    slug: "museum-drc",
+    title: "Museum DRC",
+    description:
+      "Projet autour du patrimoine congolais — présenter les collections et l'histoire du pays dans une expérience numérique.",
+    longDescription:
+      "Museum DRC explore la mise en valeur numérique du patrimoine culturel congolais : parcours de découverte, présentation des collections et navigation immersive.",
+    stack: ["TypeScript", "React", "Tailwind"],
+    github: "https://github.com/Marcusdrew/museum-drc",
+    category: "Culture",
+    year: "2026",
+    cover: ghCover("Marcusdrew", "museum-drc"),
+    highlights: ["Patrimoine congolais", "Parcours de découverte", "Expérience immersive"],
+  },
+  {
     slug: "chessmasterdrc",
     title: "ChessMaster DRC",
     description:
