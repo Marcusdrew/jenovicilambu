@@ -90,11 +90,26 @@ export const projects: Project[] = [
       "DrewMovie est une plateforme de streaming pensée pour l'upload et la diffusion de films, séries et contenus animés. Interface épurée orientée expérience utilisateur, avec une architecture pensée pour la montée en charge et une monétisation par abonnement ou publicité.",
     stack: ["React", "TypeScript", "Tailwind", "Supabase"],
     github: "https://github.com/Marcusdrew/DrewMovie",
-    demo: "https://cinemagic-flow-16.lovable.app",
+    demo: "https://drew-movie.vercel.app/",
     category: "Streaming",
     year: "2026",
-    cover: siteShot("https://cinemagic-flow-16.lovable.app"),
+    cover: siteShot("https://drew-movie.vercel.app/"),
     highlights: ["Streaming vidéo", "UX premium", "Architecture scalable"],
+  },
+  {
+    slug: "darkshadow",
+    title: "DarkShadow",
+    description:
+      "Messagerie instantanée — conversations en temps réel, interface sombre et fluide pour échanger sans friction.",
+    longDescription:
+      "DarkShadow est une application de messagerie instantanée : échange de messages en temps réel, interface sombre et minimaliste, et une expérience de conversation fluide pensée pour la simplicité et la rapidité.",
+    stack: ["React", "TypeScript", "Tailwind"],
+    github: "https://github.com/Marcusdrew/DarkShadow",
+    demo: "https://dark-shadow-nine.vercel.app/",
+    category: "Messagerie",
+    year: "2026",
+    cover: siteShot("https://dark-shadow-nine.vercel.app/"),
+    highlights: ["Temps réel", "Interface sombre", "Messages instantanés"],
   },
   {
     slug: "bcc-redesign",
